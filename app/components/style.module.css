@@ -1,0 +1,12 @@
+/* BUTTON */
+
+.buttonClass {
+    color: var(--very-light-green);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 10px;
+    background: var( --navy-blue);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

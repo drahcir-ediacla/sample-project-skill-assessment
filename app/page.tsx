@@ -1,8 +1,13 @@
-import Image from "next/image";
+
 import styles from "./page.module.css";
+import LoginForm from "./LoginForm";
 
 export default function Home() {
+
+
   return (
-    <div>Hello World</div>
+    <div className={styles.container}>
+      <LoginForm />
+    </div>
   );
 }

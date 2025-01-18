@@ -1,6 +1,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --dark-blue: #01132b;
+  --navy-blue: #19568c;
+  --very-light-green: #ecf4e7;
+  --reddish-pink: #ff0046;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,6 +23,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
+  font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
