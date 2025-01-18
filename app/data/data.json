@@ -1,0 +1,53 @@
+{
+  "companies": [
+    {
+      "id": 1,
+      "logo": "http://example.com/logo1.png",
+      "name": "Tech Corp",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "logo": "http://example.com/logo2.png",
+      "name": "Media Group",
+      "status": "Inactive"
+    },
+    {
+      "id": 3,
+      "logo": "https://example.com/logo.png",
+      "name": "Update Example Company",
+      "status": "Active",
+      "createdAt": "2025-01-18T09:52:18.981Z"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "firstname": "John",
+      "lastname": "Doe",
+      "type": "Writer",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "firstname": "Jane",
+      "lastname": "Smith",
+      "type": "Editor",
+      "status": "Inactive"
+    }
+  ],
+  "articles": [
+    {
+      "id": 1,
+      "image": "http://example.com/image1.jpg",
+      "title": "Tech Trends 2025",
+      "link": "http://example.com/article1",
+      "date": "2025-01-01",
+      "content": "Future technology trends in 2025...",
+      "status": "Published",
+      "writer": 1,
+      "editor": 2,
+      "company": 1
+    }
+  ]
+}
