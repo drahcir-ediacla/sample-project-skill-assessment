@@ -24,16 +24,20 @@
     {
       "id": 1,
       "firstname": "John",
-      "lastname": "Doe",
+      "lastname": "Meyer",
+      "username": "admin",
+      "password": "$2b$10$9SwdHjs.pQq7AxYh1aCNieGCCBb837O6PNo2G8lMnuXeONjj/4W0C",
       "type": "Writer",
       "status": "Active"
     },
     {
       "id": 2,
-      "firstname": "Jane",
-      "lastname": "Smith",
+      "firstname": "Richard",
+      "lastname": "Alcaide",
+      "username": "admin11",
+      "password": "$2b$10$XxOccKu2ocdZvLcJhODLLeg8UFPIkkBxx9HcenDl2/kWevV6o7j12",
       "type": "Editor",
-      "status": "Inactive"
+      "status": "Active"
     }
   ],
   "articles": [
@@ -48,6 +52,18 @@
       "writer": 1,
       "editor": 2,
       "company": 1
+    },
+    {
+      "id": 2,
+      "image": "http://example.com/image2.jpg",
+      "title": "New Media Innovations",
+      "link": "http://example.com/article2",
+      "date": "2025-02-01",
+      "content": "Innovations in the media industry...",
+      "status": "For Edit",
+      "writer": 1,
+      "editor": 2,
+      "company": 2
     }
   ]
 }

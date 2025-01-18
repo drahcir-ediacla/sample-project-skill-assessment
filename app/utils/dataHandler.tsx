@@ -13,6 +13,8 @@ interface User {
   id: number;
   firstname: string;
   lastname: string;
+  username: string;
+  password: string;
   type: "Writer" | "Editor";
   status: "Active" | "Inactive";
 }
@@ -24,7 +26,7 @@ interface Article {
   link: string;
   date: string;
   content: string;
-  status: "Published" | "Draft" | "Archived";
+  status: "Published" | "For Edit";
   writer: number;
   editor: number;
   company: number;
