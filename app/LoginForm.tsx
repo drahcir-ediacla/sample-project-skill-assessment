@@ -17,13 +17,13 @@ const LoginForm = () => {
     const login = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setError("");
-    
+
         try {
             const response = await axiosHandler.post(
                 "/api/auth",
                 { username, password }, // Correctly send the data payload
             );
-    
+
             if (response.status === 200) {
                 alert("Login successful! Redirecting...");
                 router.push('/admin');
@@ -39,7 +39,7 @@ const LoginForm = () => {
             }
         }
     };
-    
+
 
     return (
         <main className={styles.loginFormContainer}>
