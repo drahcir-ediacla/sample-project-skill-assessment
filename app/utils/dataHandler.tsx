@@ -26,9 +26,9 @@ interface Article {
   date: string;
   content: string;
   status: "Published" | "For Edit";
-  writer: number;
-  editor: number;
-  company: number;
+  writer: number | string;
+  editor: number | string;
+  company: number | string;
 }
 
 interface Data {

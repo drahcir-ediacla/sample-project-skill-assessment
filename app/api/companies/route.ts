@@ -61,7 +61,7 @@ export function GET() {
         logo,
         name,
         status,
-        createdAt: new Date().toISOString(), // Optional timestamp
+        // createdAt: new Date().toISOString(), // Optional timestamp
       };
   
       // Add the new company to the data

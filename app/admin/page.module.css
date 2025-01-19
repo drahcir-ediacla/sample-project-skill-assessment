@@ -134,12 +134,7 @@
   color: #155724;
 }
 
-.status.draft {
-  background-color: #fff3cd;
-  color: #856404;
-}
-
-.status.archived {
+.status.forEdit {
   background-color: #f8d7da;
   color: #721c24;
 }

@@ -1,0 +1,103 @@
+.formContainer {
+    margin: 20px;
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+    height: auto;
+    max-width: 1000px;
+    margin-top: 20px;
+}
+
+.form .formRow1,
+.form .formRow2,
+.form .formRow3,
+.form .formRow5,
+.form .formRow6 {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form .formRow4 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+}
+
+.form .formRow4 .linkInput {
+    width: 100%;
+}
+
+.form .formRow1 .selectCompany {
+    position: relative;
+}
+
+.form .formRow1 .selectCompany .dropDownArrow {
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    font-size: 16px;
+    height: 100%;
+    justify-content: flex-end;
+    line-height: 32px;
+    outline: none;
+    padding-right: 15px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.form .formRow1 .selectCompany .selectedOptions {
+    background: none;
+    display: flex;
+}
+
+.form .formRow1 .selectCompany .selectedOptions .selectedCompanyStyle {
+    border: 1px solid #bcbcbc;
+    border-radius: 5px;
+    flex-grow: 1;
+    font-size: 15px;
+    height: 40px;
+    outline: none;
+    padding: 0 15px;
+}
+
+.form .formRow1 .selectCompany .options {
+    background: #fff;
+    border: 1px solid #bcbcbc;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    display: block;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 42px;
+    z-index: 1;
+}
+
+.form .formRow1 .selectCompany .option {
+    color: var(--black-101);
+    cursor: pointer;
+    font-weight: 500;
+    padding: 5px 8px;
+}
+
+.form .formRow1 .selectCompany .option:hover {
+    background-color: #f5f5f5;
+}
+
+.form .formRow5 .articleDate {
+    width: 100%;
+    height: 40px;
+    font-size: 1rem;
+    padding: 0 10px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #bcbcbc;
+}

@@ -1,31 +1,12 @@
 'use client'
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from './page.module.css'
 import ArticleList from './ArticleList'
 import { TbLogout2 } from "react-icons/tb";
 import axiosHandler from "../utils/axiosHandler";
-import { cookies } from 'next/headers'; // For accessing cookies in server components
 
 const AdminHomePage = () => {
   const router = useRouter()
-
-  // useEffect(() => {
-  //   const token = document.cookie.split('; ').find(row => row.startsWith('auth_token='))?.split('=')[1];
-
-  //   if (!token) {
-  //     router.push('/'); // Redirect to login if not authenticated
-  //   }
-  // }, [router]);
-
-  // const cookieStore = cookies();
-  // const token = await cookieStore.get('auth_token'); // Access the cookie by its name
-
-  // if (!token) {
-  //   // If token doesn't exist, render an error or redirect
-  //   return <p>You must be logged in to access the admin page.</p>;
-  // }
-
 
   const logout = async () => {
     try {

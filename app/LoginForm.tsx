@@ -51,16 +51,20 @@ const LoginForm = () => {
                     </div>
                 </div>
                 <div className={styles.row2}>
-                    <b>Username</b>
+                    <label htmlFor="inputUsernameID"><b>Username</b></label>
                     <Input
+                        id="inputUsernameID"
+                        name="nameUsername"
                         value={username}
                         placeholder="Enter username"
                         className={styles.inputField}
                         onChange={(e) => setUsername(e.target.value)} />
                 </div>
                 <div className={styles.row3}>
-                    <b>Password</b>
+                    <label htmlFor="inputPasswordID"><b>Password</b></label>
                     <Input
+                        id="inputPasswordID"
+                        name="namePassword"
                         type="password"
                         value={password}
                         placeholder="Enter password"

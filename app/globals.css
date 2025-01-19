@@ -45,3 +45,12 @@ a {
     color-scheme: dark;
   }
 }
+
+
+.ProseMirror {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  min-height: 150px;
+  outline: none;
+}

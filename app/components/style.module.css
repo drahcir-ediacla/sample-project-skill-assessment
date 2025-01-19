@@ -18,6 +18,25 @@
     font-size: 1rem;
     padding: 0 10px;
     outline: none;
-    border-radius: 3px;
+    border-radius: 5px;
     border: 1px solid #bcbcbc;
   }
+
+  /* Date Picker */
+
+.datePickerBox {
+    position: relative;
+}
+
+.datePickerBox .calendarIcon {
+    position: absolute;
+    color: var(--gray-500);
+    padding: 0 5px;
+    top: 10px;
+    left: 5px;
+}
+
+.datePickerBox input.active {
+    background: none;
+}
+
