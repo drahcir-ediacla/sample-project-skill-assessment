@@ -45,6 +45,11 @@
   padding: 0 10px;
   outline: none;
   border-radius: 3px;
+  border: 1px solid #bcbcbc;
+}
+
+.error {
+  color: red;
 }
 
 /*-------------------- LOGIN FORM STYLE MEDIA QUERY ------------------------------*/

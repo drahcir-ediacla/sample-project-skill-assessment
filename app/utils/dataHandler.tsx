@@ -1,6 +1,5 @@
 import fs from "fs";
 import path from "path";
-import data from '../data/data.json'
 
 interface Company {
   id: number;

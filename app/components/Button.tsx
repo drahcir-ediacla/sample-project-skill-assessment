@@ -3,8 +3,8 @@
 import styles from './style.module.css';
 
 interface ButtonProps {
-  onClick: () => void;
-  label: string;
+  onClick?: ((event: React.MouseEvent<HTMLButtonElement>) => void) | (() => void);
+  label?: string;
   className?: string;
 }
 

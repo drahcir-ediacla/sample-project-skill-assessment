@@ -6,7 +6,7 @@ export async function GET() {
   // Clear the authentication token cookie
   response.cookies.set("token", "", {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === "production", // Secure only in production
     path: "/", // Apply to the root path
     expires: new Date(0), // Expired date to clear the cookie
   });
