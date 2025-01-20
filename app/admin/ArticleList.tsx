@@ -6,6 +6,7 @@ import Button from "../components/Button"
 import styles from "./page.module.css"
 import Link from "next/link"
 import axiosHandler from "../utils/axiosHandler"
+import Image from "next/image";
 
 interface Company {
   id: number;
@@ -114,7 +115,7 @@ const ArticleList = () => {
                     <button className={styles.editBtn}>Edit</button>
                   }
                 </td>
-                <td><img src={articleItem.image} alt="" /></td>
+                <td><Image src={articleItem.image} alt="" /></td>
                 <td>{articleItem.title}</td>
                 <td><Link href={articleItem.link} target="_blank">View Link</Link></td>
                 <td>{articleItem.writer.firstname} {articleItem.writer.lastname}</td>
