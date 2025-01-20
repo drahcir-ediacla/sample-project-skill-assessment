@@ -20,5 +20,6 @@ A simple Next.js project with mock API and JSON-based data storage.
 - EROFS: read-only file system (Occurs when your application tries to write to a file in a location that is read-only in "production" mode.)
 - Creating a new article is supposed to be allowed for writers only, but I didn't complete the functionality to restrict it for editors
 - Failure to implement a text editor or WYSIWYG editor in the Content field. (I got stuck with this part of the process and decided to temporarily skip it.)
+- Link of article will lead to 404 page as I am not yet done creating page for specific article.
 
 Note: This app is a demonstration and uses a file-based storage system (data.json) for simplicity. In production, a scalable database would replace this setup. 
