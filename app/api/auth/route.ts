@@ -9,7 +9,7 @@ interface User {
   id: number;
   username: string;
   password: string;
-  type: string;
+  type: string | null;
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
@@ -19,12 +19,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const { username, password } = await request.json();
 
     if (!username || !password) {
-      return NextResponse.json({ error: "Username and password are required" }, { status: 400 });
+      return NextResponse.json({ message: "Username and password are required" }, { status: 400 });
     }
 
     const user = users.find((u) => u.username === username);
     if (!user || !(await bcrypt.compare(password, user.password))) {
-      return NextResponse.json({ error: "Invalid username or password" }, { status: 401 });
+      return NextResponse.json({ message: "Invalid username or password" }, { status: 401 });
     }
 
     // Generate JWT token

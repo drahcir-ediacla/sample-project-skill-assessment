@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import axiosHandler from "./utils/axiosHandler";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,11 +13,38 @@ const LoginForm = () => {
     const router = useRouter()
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
     const [error, setError] = useState("");
+
+
+    const validateForm = () => {
+        let hasErrors = false;
+
+        if (!username) {
+            setEmailError('Username is required');
+            hasErrors = true;
+        } else {
+            setEmailError('');
+        }
+
+        if (!password) {
+            setPasswordError('Password is required');
+            hasErrors = true;
+        } else {
+            setPasswordError('');
+        }
+
+        return !hasErrors;
+    };
 
     const login = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setError("");
+
+        if (!validateForm()) {
+            return;
+        }
 
         try {
             const response = await axiosHandler.post(
@@ -27,12 +55,16 @@ const LoginForm = () => {
             if (response.status === 200) {
                 alert("Login successful! Redirecting...");
                 router.push('/admin');
-            } else {
-                setError("Login failed. Please try again.");
             }
+
         } catch (error) {
             console.error('Error sending request:', error);
-            setError("An unexpected error occurred. Please try again later.");
+            // Safely access 'error.response.data.message'
+            if (axios.isAxiosError(error) && error.response) {
+                setError(error.response.data?.message || "An unknown error occurred.");
+            } else {
+                setError("An unexpected error occurred.");
+            }
         }
     };
 
@@ -48,6 +80,7 @@ const LoginForm = () => {
                 </div>
                 <div className={styles.row2}>
                     <label htmlFor="inputUsernameID"><b>Username</b></label>
+                    {emailError && <p className={styles.error}><FontAwesomeIcon icon={faInfoCircle} color='red' /> {emailError}</p>}
                     <Input
                         id="inputUsernameID"
                         name="nameUsername"
@@ -58,6 +91,7 @@ const LoginForm = () => {
                 </div>
                 <div className={styles.row3}>
                     <label htmlFor="inputPasswordID"><b>Password</b></label>
+                    {passwordError && <p className={styles.error}><FontAwesomeIcon icon={faInfoCircle} color='red' /> {passwordError}</p>}
                     <Input
                         id="inputPasswordID"
                         name="namePassword"
