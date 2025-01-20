@@ -47,7 +47,7 @@ const ArticleList = () => {
   const { user: authUser } = useAuthentication()
   const [article, setArticle] = useState<Article[]>([])
   const router = useRouter()
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 
@@ -60,9 +60,10 @@ const ArticleList = () => {
         }
       } catch (error) {
         console.error('Error fetching articles:', error);
-      } finally {
-        setLoading(false);
-      }
+      } 
+      // finally {
+      //   setLoading(false);
+      // }
     }
     fetchArticles();
   }, [])
