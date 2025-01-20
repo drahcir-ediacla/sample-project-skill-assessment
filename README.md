@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Article Management System Mock API Server (Archintel Developer Exam)
 
-## Getting Started
+A simple Next.js project with mock API and JSON-based data storage.
 
-First, run the development server:
+## Available Features
+- Mock endpoints: `/api/auth`, `/api/companies`, `/api/users`, `/api/articles` (available GET, POST, and UPDATE APIs for managing data)
+- Authentication with JWT tokens.
+- Persistent data using `data.json`.
+- Web Responsive
+- Login function for both writer and editor users (required fields)
+- Editor and Writer Dashboard(Admin Panel)
+- "Add New User" and "Add New Company" buttons are hidden if the authenticated user is "Writer"
+- "Add New Article" button is hidden if the authenticated user is "Editor"
+- The first name and type of the authenticated user are displayed in the header of the admin panel page.
+- Create New Article 
+- Tabular display for the lists of articles
+- The Edit button is disabled for the writer if the article status is "Published."
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Some functionality issues from available features
+- EROFS: read-only file system (Occurs when your application tries to write to a file in a location that is read-only in "production" mode.)
+- Creating a new article is supposed to be allowed for writers only, but I didn't complete the functionality to restrict it for editors
+- Failure to implement a text editor or WYSIWYG editor in the Content field. (I got stuck with this part of the process and decided to temporarily skip it.)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Note: This app is a demonstration and uses a file-based storage system (data.json) for simplicity. In production, a scalable database would replace this setup. 

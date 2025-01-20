@@ -3,21 +3,26 @@
     {
       "id": 1,
       "logo": "http://example.com/logo1.png",
-      "name": "Tech Corp",
+      "name": "Breaking News TV",
       "status": "Active"
     },
     {
       "id": 2,
       "logo": "http://example.com/logo2.png",
-      "name": "Media Group",
+      "name": "Global News",
       "status": "Inactive"
     },
     {
       "id": 3,
       "logo": "https://example.com/logo.png",
-      "name": "Update Example Company",
-      "status": "Active",
-      "createdAt": "2025-01-18T09:52:18.981Z"
+      "name": "Live Broadcast News",
+      "status": "Active"
+    },
+    {
+      "id": 4,
+      "logo": "https://example.com/logo.png",
+      "name": "Live TV Network",
+      "status": "Active"
     }
   ],
   "users": [
@@ -25,67 +30,67 @@
       "id": 1,
       "firstname": "John",
       "lastname": "Meyer",
-      "username": "admin",
-      "password": "$2b$10$9SwdHjs.pQq7AxYh1aCNieGCCBb837O6PNo2G8lMnuXeONjj/4W0C",
-      "type": "Writer",
+      "username": "admin_editor",
+      "password": "$2b$10$qIl/KjkdjH6RaFH.wcSQ4eGz5fzdAVIPuLxyk4IfmwPiEULwkorq6",
+      "type": "Editor",
       "status": "Active"
     },
     {
       "id": 2,
-      "firstname": "Richard",
-      "lastname": "Alcaide",
-      "username": "admin11",
-      "password": "$2b$10$XxOccKu2ocdZvLcJhODLLeg8UFPIkkBxx9HcenDl2/kWevV6o7j12",
-      "type": "Editor",
+      "firstname": "Sofia",
+      "lastname": "Valdez",
+      "username": "admin_writer",
+      "password": "$2b$10$3TO0ElFOBiFR.DaEW9oBgeURBKpRX8RPVbYDwrUsIn7FEAZUtrERS",
+      "type": "Writer",
       "status": "Active"
     }
   ],
   "articles": [
     {
       "id": 1,
-      "image": "http://example.com/image1.jpg",
+      "image": "https://res.cloudinary.com/yogeek-cloudinary/image/upload/v1737354522/samples/news_zn3o4z.webp",
       "title": "Tech Trends 2025",
-      "link": "http://example.com/article1",
+      "link": "https://sample-project-skill-assessment.vercel.app/article/article1",
       "date": "2025-01-01",
       "content": "Future technology trends in 2025...",
       "status": "Published",
-      "writer": 1,
-      "editor": 2,
+      "writer": 2,
+      "editor": 1,
       "company": 1
     },
     {
       "id": 2,
-      "image": "http://example.com/image2.jpg",
+      "image": "https://res.cloudinary.com/yogeek-cloudinary/image/upload/v1737354522/samples/breaking_news_hgpthp.png",
       "title": "New Media Innovations",
-      "link": "http://example.com/article2",
+      "link": "https://sample-project-skill-assessment.vercel.app/article/article2",
       "date": "2025-02-01",
       "content": "Innovations in the media industry...",
       "status": "For Edit",
-      "writer": 1,
-      "editor": 2,
-      "company": 2
-    },
-    {
-      "id": 3,
-      "image": "https://res.cloudinary.com/yogeek-cloudinary/image/upload/v1737339652/samples/iyh0dmaswmujqabbku5n.jpg",
-      "title": "Sample Article 1",
-      "link": "http://localhost:3000/article/fdsgsg-sgsdg",
-      "date": "2025-01-20",
-      "content": "Sample Content 1",
-      "status": "For Edit",
-      "writer": 1,
+      "writer": 2,
       "editor": null,
       "company": 2
     },
     {
-      "id": 4,
-      "image": "https://res.cloudinary.com/yogeek-cloudinary/image/upload/v1737342371/samples/bbdvhqmw8whhod6lxye1.jpg",
-      "title": "Testing",
-      "link": "http://localhost:3000/article/aasgaga",
+      "id": 3,
+      "image": "https://res.cloudinary.com/yogeek-cloudinary/image/upload/v1737354523/samples/tv_qukjew.png",
+      "title": "Mines for a clean-energy metal have a surprise climate effect",
+      "link": "https://sample-project-skill-assessment.vercel.app/article/article3",
       "date": "2025-01-20",
-      "content": "asgasgasgag",
+      "content": "Vegetation clearing to extract nickel, which is used in renewable technologies, leads to greater carbon emissions than realized.",
+      "status": "Published",
+      "writer": 2,
+      "editor": 1,
+      "company": 2
+    },
+    {
+      "id": 4,
+      "image": "https://res.cloudinary.com/yogeek-cloudinary/image/upload/v1737354522/samples/news_live_dqjkmk.png",
+      "title": "RNA molecule rejuvenates ageing mice by restoring old cells",
+      "link": "https://sample-project-skill-assessment.vercel.app/article/article4",
+      "date": "2025-01-20",
+      "content": "Mice injected with a microRNA molecule lived longer and had fewer markers of ageing, but it’s not yet known if the treatment would work in people.",
       "status": "For Edit",
-      "writer": 1,
+      "writer": 2,
       "editor": null,
       "company": 3
     }
