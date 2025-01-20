@@ -25,7 +25,6 @@ interface Article {
     content: string;
     status: "Published" | "For Edit";
     writer: number | string;
-    editor: number | null;
     company: number | string;
 };
 
@@ -35,12 +34,13 @@ const AddArticlePage = () => {
     const dropDownSelect = useRef<HTMLDivElement | null>(null);
     const [optionsOpen, setOptionsOpen] = useState(false)
     const [companyData, setCompanyData] = useState<Company[]>([])
+    const [selectedCompany, setSelectedCompany] = useState('')
     const [requiredCompany, setRequiredCompany] = useState('')
     const [requiredTitle, setRequiredTitle] = useState('')
     const [requiredLink, setRequiredLink] = useState('')
     const [requiredDate, setRequiredDate] = useState('')
     const [requiredContent, setRequiredContent] = useState('')
-    const [requiredImage, setRequiredImage] = useState('')
+    const [uploadImg, setUploadImg] = useState<File | ''>('');
     const [errMsg, setErrMsg] = useState('');
     const [isSending, setIsSending] = useState(false);
     const [newArticleInfo, setNewArticleInfo] = useState<Article>(() => {
@@ -51,8 +51,7 @@ const AddArticlePage = () => {
             date: new Date().toISOString().split('T')[0],
             content: '',
             status: 'For Edit',
-            writer: authUser?.id ?? '',  // Safely handle undefined
-            editor: null,
+            writer: authUser?.id ?? '',
             company: '',
         };
     });
@@ -82,8 +81,9 @@ const AddArticlePage = () => {
         };
     }, [])
 
-    const handleCompanySelect = (id: number) => {
+    const handleCompanySelect = (id: number, name: string) => {
         setNewArticleInfo({ ...newArticleInfo, company: id })
+        setSelectedCompany(name)
         setOptionsOpen(false)
     }
 
@@ -105,6 +105,12 @@ const AddArticlePage = () => {
 
     const toggleOptionsOpen = () => {
         setOptionsOpen(!optionsOpen)
+    }
+
+    const handleSlugChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const slug = e.target.value
+        const BaseUrl = process.env.NEXT_PUBLIC_ARTICLE_PERMALINK_BASE_URL;
+        setNewArticleInfo({ ...newArticleInfo, link: `${BaseUrl}${slug}` })
     }
 
     const validateForm = () => {
@@ -144,16 +150,120 @@ const AddArticlePage = () => {
         } else {
             setRequiredContent('');
         }
-
-        if (!newArticleInfo.image) {
-            setRequiredImage('This field is required.');
-            hasErrors = true;
-        } else {
-            setRequiredImage('');
-        }
-
         return !hasErrors;
     };
+
+    const handleImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]; // Access the first file (if it exists)
+        const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB in bytes
+
+        if (!file) {
+            alert('No image selected.');
+            return;
+        }
+
+        if (file.size > MAX_FILE_SIZE) {
+            alert(`File ${file.name} exceeds the maximum size of 2MB and will not be uploaded.`);
+            return;
+        }
+
+        if (!file.type.startsWith('image/')) {
+            alert('Only image files are allowed.');
+            return;
+        }
+
+        setUploadImg(file); // Store the file for later use (e.g., in form submission)
+    };
+
+
+
+    const uploadImgToCloudinary = async (file: File) => {
+        const formData = new FormData();
+        formData.append('upload_preset', 'auwcvbw0');
+        formData.append('cloud_name', 'yogeek-cloudinary');
+        formData.append('folder', 'samples');
+        formData.append('file', file);
+
+        const CLOUDINARY_API = process.env.NEXT_PUBLIC_CLOUDINARY_API;
+
+        if (!CLOUDINARY_API) {
+            throw new Error('CLOUDINARY_API is not defined in environment variables.');
+        }
+
+        try {
+            const response = await fetch(CLOUDINARY_API, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                return data.secure_url; // Return single uploaded file info
+            } else {
+                console.error(`Error uploading ${file.name}: ${response.statusText}`);
+                return null; // Return null for unsuccessful uploads
+            }
+        } catch (error) {
+            console.error(`Error uploading ${file.name}:`, error);
+            return null; // Return null for errors
+        }
+    };
+
+    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+
+        if (!validateForm()) {
+            return;
+        }
+        setIsSending(true)
+
+        try {
+            // Ensure the file input contains a valid file
+            const fileInput = document.querySelector<HTMLInputElement>("#fileInputId");
+            if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+                alert("Please upload a file.");
+                setIsSending(false);
+                return;
+            }
+
+            const file = fileInput.files[0]; // Get the selected file
+
+            // Upload the file to Cloudinary and get its URL
+            const fileUrl = await uploadImgToCloudinary(file);
+
+            const requestWithFile = {
+                ...newArticleInfo,
+                image: fileUrl, // Save the uploaded file URL
+            };
+
+            const response = await axiosHandler.post('/api/articles', requestWithFile);
+            console.log('Request sent successfully:', response.data);
+            alert('Added new article successfully!');
+
+            // Reset the form
+            setNewArticleInfo({
+                image: '',
+                title: '',
+                link: '',
+                date: new Date().toISOString().split('T')[0],
+                content: '',
+                status: 'For Edit',
+                writer: authUser?.id ?? '',
+                company: '',
+            });
+            setSelectedCompany('')
+            setIsSending(false)
+            // Refresh the page
+            window.location.reload();
+        } catch (error) {
+            console.error('Error sending request:', error);
+            alert('Unable to send your request. Please try again.');
+        } finally {
+            setIsSending(false)
+        }
+    };
+
+
 
 
     return (
@@ -162,7 +272,7 @@ const AddArticlePage = () => {
             <form className={styles.form}>
                 <div className={styles.formRow1}>
                     <b>Company</b>
-                    {requiredCompany && <span style={{color: 'red', fontSize: '13px'}}><FontAwesomeIcon icon={faInfoCircle} color='red' /> {requiredCompany}</span>}
+                    {requiredCompany && <span style={{ color: 'red', fontSize: '13px' }}><FontAwesomeIcon icon={faInfoCircle} color='red' /> {requiredCompany}</span>}
                     <div className={styles.selectCompany} ref={dropDownSelect}>
                         <div
                             className={`${styles.dropDownArrow} ${optionsOpen ? 'active' : ''}`}
@@ -171,7 +281,7 @@ const AddArticlePage = () => {
                             <IoIosArrowDown />
                         </div>
                         <div className={styles.selectedOptions}>
-                            <input type="text" id='selectedCompany' className={styles.selectedCompanyStyle} placeholder='Please select one...' readOnly />
+                            <input type="text" id='selectedCompanyID' className={styles.selectedCompanyStyle} value={selectedCompany} placeholder='Please select one...' readOnly />
                         </div>
                         {optionsOpen &&
                             <div className={styles.options}>
@@ -179,7 +289,7 @@ const AddArticlePage = () => {
                                     <div
                                         key={option.id}
                                         className={styles.option}
-                                        onClick={() => handleCompanySelect(option.id)}
+                                        onClick={() => handleCompanySelect(option.id, option.name)}
                                     >
                                         {option.name}
                                     </div>
@@ -190,12 +300,16 @@ const AddArticlePage = () => {
                 </div>
                 <div className={styles.formRow2}>
                     <b>Upload Image</b>
-                    {requiredImage && <span style={{color: 'red', fontSize: '13px'}}><FontAwesomeIcon icon={faInfoCircle} color='red' /> {requiredImage}</span>}
-                    <input type='file' />
+                    <input
+                        type='file'
+                        id='fileInputId'
+                        onChange={handleImgChange}
+                        accept=".png,.jpg,.jpeg"
+                    />
                 </div>
                 <div className={styles.formRow3}>
                     <label htmlFor="inputTitleID"><b>Title</b></label>
-                    {requiredTitle && <span style={{color: 'red', fontSize: '13px'}}><FontAwesomeIcon icon={faInfoCircle} color='red' /> {requiredTitle}</span>}
+                    {requiredTitle && <span style={{ color: 'red', fontSize: '13px' }}><FontAwesomeIcon icon={faInfoCircle} color='red' /> {requiredTitle}</span>}
                     <Input
                         id='inputTitleID'
                         name='nameTitle'
@@ -206,19 +320,18 @@ const AddArticlePage = () => {
                 </div>
                 <div className={styles.formRow4}>
                     <label htmlFor="inputLinkID"><b>Permalink:</b> <span>{process.env.NEXT_PUBLIC_ARTICLE_PERMALINK_BASE_URL}</span></label>
-                    {requiredLink && <span style={{color: 'red', fontSize: '13px'}}><FontAwesomeIcon icon={faInfoCircle} color='red' /> {requiredLink}</span>}
+                    {requiredLink && <span style={{ color: 'red', fontSize: '13px' }}><FontAwesomeIcon icon={faInfoCircle} color='red' /> {requiredLink}</span>}
                     <Input
                         id='inputLinkID'
                         name='nameLink'
                         className={styles.linkInput}
                         placeholder='Enter slug'
-                        value={newArticleInfo.link}
-                        onChange={(e) => setNewArticleInfo({ ...newArticleInfo, link: e.target.value })}
+                        onChange={handleSlugChange}
                     />
                 </div>
                 <div className={styles.formRow5}>
                     <label htmlFor='articleDateID'><b>Date</b></label>
-                    {requiredDate && <span style={{color: 'red', fontSize: '13px'}}><FontAwesomeIcon icon={faInfoCircle} color='red' /> {requiredDate}</span>}
+                    {requiredDate && <span style={{ color: 'red', fontSize: '13px' }}><FontAwesomeIcon icon={faInfoCircle} color='red' /> {requiredDate}</span>}
                     <DatePicker
                         id="articleDateID"
                         name="nameArticleDate"
@@ -229,7 +342,7 @@ const AddArticlePage = () => {
                 </div>
                 <div className={styles.formRow6}>
                     <label htmlFor='textContentID'><b>Content</b></label>
-                    {requiredContent && <span style={{color: 'red', fontSize: '13px'}}><FontAwesomeIcon icon={faInfoCircle} color='red' /> {requiredContent}</span>}
+                    {requiredContent && <span style={{ color: 'red', fontSize: '13px' }}><FontAwesomeIcon icon={faInfoCircle} color='red' /> {requiredContent}</span>}
                     <textarea
                         id='textContentID'
                         name='nameContent'
@@ -238,7 +351,7 @@ const AddArticlePage = () => {
                         rows={10}
                     />
                 </div>
-                <Button label='Save' />
+                <Button label='Save' onClick={handleSubmit} />
             </form>
 
         </div>

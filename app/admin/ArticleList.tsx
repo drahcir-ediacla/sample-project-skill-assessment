@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation";
+import useAuthentication from "../hooks/authHook";
 import Button from "../components/Button"
 import styles from "./page.module.css"
 import Link from "next/link"
@@ -43,6 +44,7 @@ interface Article {
 };
 
 const ArticleList = () => {
+  const { user: authUser } = useAuthentication()
   const [article, setArticle] = useState<Article[]>([])
   const router = useRouter()
   const [loading, setLoading] = useState(true);
@@ -72,9 +74,15 @@ const ArticleList = () => {
   return (
     <>
       <div className={styles.addButtons}>
-        <Button onClick={addNewArticle} label="Add New Article" />
-        <Button onClick={() => console.log('this is button')} label="Add New User" />
-        <Button onClick={() => console.log('this is button')} label="Add New Company" />
+        {authUser?.type === 'Writer' &&
+          <Button onClick={addNewArticle} label="Add New Article" />
+        }
+        {authUser?.type === 'Editor' &&
+          <>
+            <Button onClick={() => console.log('this is button')} label="Add New User" />
+            <Button onClick={() => console.log('this is button')} label="Add New Company" />
+          </>
+        }
       </div>
       <div className={styles.tableContainer}>
         <table className={styles.articleTable}>
@@ -90,92 +98,34 @@ const ArticleList = () => {
             </tr>
           </thead>
           <tbody>
-          {article.map((articleItem) => (
-            <tr key={articleItem.id}>
-              <td><button className={styles.editBtn}>✏️ Edit</button></td>
-              <td><img src={articleItem.image} alt="" /></td>
-              <td>{articleItem.title}</td>
-              <td><Link href={articleItem.link} target="_blank">View Link</Link></td>
-              <td>{articleItem.writer.firstname} {articleItem.writer.lastname}</td>
-              <td>{articleItem.editor.firstname} {articleItem.editor.lastname}</td>
-              <td><span className={`${styles.status} ${articleItem.status === 'Published' ? styles.published : styles.forEdit}`}>{articleItem.status}</span></td>
-            </tr>
+            {article.map((articleItem) => (
+              <tr key={articleItem.id}>
+                <td>
+                  {authUser?.type === 'Writer' && (
+                    <button
+                      className={styles.editBtn}
+                      disabled={articleItem?.status !== 'For Edit'}
+                    >
+                      Edit
+                    </button>
+                  )}
+                  {authUser?.type === 'Editor' &&
+                    <button className={styles.editBtn}>Edit</button>
+                  }
+                </td>
+                <td><img src={articleItem.image} alt="" /></td>
+                <td>{articleItem.title}</td>
+                <td><Link href={articleItem.link} target="_blank">View Link</Link></td>
+                <td>{articleItem.writer.firstname} {articleItem.writer.lastname}</td>
+                <td>{articleItem.editor
+                  ? `${articleItem.editor.firstname} ${articleItem.editor.lastname}`
+                  : "No editor assigned"}</td>
+                <td><span className={`${styles.status} ${articleItem.status === 'Published' ? styles.published : styles.forEdit}`}>{articleItem.status}</span></td>
+              </tr>
             ))}
           </tbody>
         </table>
       </div>
-      {/* <div className={styles.tableContainer}>
-        <table className={styles.articleTable}>
-          <thead>
-            <tr>
-              <th>Actions</th>
-              <th>Image</th>
-              <th>Title</th>
-              <th>Link</th>
-              <th>Writer</th>
-              <th>Editor</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><button className={styles.editBtn}>✏️ Edit</button></td>
-              <td><img src="https://via.placeholder.com/50" alt="Thumbnail" /></td>
-              <td>Sample Article 1</td>
-              <td><Link href="#" target="_blank">View Link</Link></td>
-              <td>John Doe</td>
-              <td>Jane Smith</td>
-              <td><span className={`${styles.status} ${styles.published}`}>Published</span></td>
-            </tr>
-            <tr>
-              <td><button className={styles.editBtn}>✏️ Edit</button></td>
-              <td><img src="https://via.placeholder.com/50" alt="Thumbnail" /></td>
-              <td>Another Great Read</td>
-              <td><Link href="#" target="_blank">View Link</Link></td>
-              <td>Alice Johnson</td>
-              <td>Richard Roe</td>
-              <td><span className={`${styles.status} ${styles.draft}`}>Draft</span></td>
-            </tr>
-            <tr>
-              <td><button className={styles.editBtn}>✏️ Edit</button></td>
-              <td><img src="https://via.placeholder.com/50" alt="Thumbnail" /></td>
-              <td>Breaking News</td>
-              <td><Link href="#" target="_blank">View Link</Link></td>
-              <td>Michael Brown</td>
-              <td>Sarah Green</td>
-              <td><span className={`${styles.status} ${styles.archived}`}>For Edit</span></td>
-            </tr>
-
-            <tr>
-              <td><button className={styles.editBtn}>✏️ Edit</button></td>
-              <td><img src="https://via.placeholder.com/50" alt="Thumbnail" /></td>
-              <td>Sample Article 1</td>
-              <td><Link href="#" target="_blank">View Link</Link></td>
-              <td>John Doe</td>
-              <td>Jane Smith</td>
-              <td><span className={`${styles.status} ${styles.published}`}>Published</span></td>
-            </tr>
-            <tr>
-              <td><button className={styles.editBtn}>✏️ Edit</button></td>
-              <td><img src="https://via.placeholder.com/50" alt="Thumbnail" /></td>
-              <td>Another Great Read</td>
-              <td><Link href="#" target="_blank">View Link</Link></td>
-              <td>Alice Johnson</td>
-              <td>Richard Roe</td>
-              <td><span className={`${styles.status} ${styles.draft}`}>Draft</span></td>
-            </tr>
-            <tr>
-              <td><button className={styles.editBtn}>✏️ Edit</button></td>
-              <td><img src="https://via.placeholder.com/50" alt="Thumbnail" /></td>
-              <td>Breaking News</td>
-              <td><Link href="#" target="_blank">View Link</Link></td>
-              <td>Michael Brown</td>
-              <td>Sarah Green</td>
-              <td><span className={`${styles.status} ${styles.archived}`}>For Edit</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div> */}
     </>
   )
 }

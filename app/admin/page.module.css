@@ -100,17 +100,12 @@
 
 .editBtn {
   padding: 5px 10px;
-  background-color: var(--reddish-pink);
-  color: #fff;
-  border: none;
+  border: 1px solid;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
 }
 
-.editBtn:hover {
-  background-color: #0056b3;
-}
 
 .articleTable a {
   color: #007bff;

@@ -64,6 +64,18 @@
       "writer": 1,
       "editor": 2,
       "company": 2
+    },
+    {
+      "id": 3,
+      "image": "https://res.cloudinary.com/yogeek-cloudinary/image/upload/v1737339652/samples/iyh0dmaswmujqabbku5n.jpg",
+      "title": "Sample Article 1",
+      "link": "http://localhost:3000/article/fdsgsg-sgsdg",
+      "date": "2025-01-20",
+      "content": "Sample Content 1",
+      "status": "For Edit",
+      "writer": 1,
+      "editor": null,
+      "company": 2
     }
   ]
 }
