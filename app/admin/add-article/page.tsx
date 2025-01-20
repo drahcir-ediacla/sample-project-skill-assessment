@@ -40,8 +40,6 @@ const AddArticlePage = () => {
     const [requiredLink, setRequiredLink] = useState('')
     const [requiredDate, setRequiredDate] = useState('')
     const [requiredContent, setRequiredContent] = useState('')
-    const [uploadImg, setUploadImg] = useState<File | ''>('');
-    const [errMsg, setErrMsg] = useState('');
     const [isSending, setIsSending] = useState(false);
     const [newArticleInfo, setNewArticleInfo] = useState<Article>(() => {
         return {
@@ -171,8 +169,6 @@ const AddArticlePage = () => {
             alert('Only image files are allowed.');
             return;
         }
-
-        setUploadImg(file); // Store the file for later use (e.g., in form submission)
     };
 
 

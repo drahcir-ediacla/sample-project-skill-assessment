@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { readData } from "@/app/utils/dataHandler";
 
+interface DecodedToken {
+  id: number; // or number depending on your database
+}
+
 const SECRET_KEY = <string>process.env.TOKEN_SECRET_KEY;
 
 if (!SECRET_KEY) {
@@ -19,11 +23,11 @@ export function GET(request: NextRequest) {
 
   try {
     // Validate token
-    const decoded = jwt.verify(token, SECRET_KEY);
+    const decoded = jwt.verify(token, SECRET_KEY) as DecodedToken;
 
     // Optionally fetch user data from the database (if needed)
     const data = readData();
-    const user = data.users.find((u) => u.id === (decoded as any).id);
+    const user = data.users.find((u) => u.id === Number(decoded.id));
 
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });

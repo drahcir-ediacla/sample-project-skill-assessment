@@ -30,13 +30,9 @@ const LoginForm = () => {
             } else {
                 setError("Login failed. Please try again.");
             }
-        } catch (err: any) {
-            console.error("Login error:", err);
-            if (err.response && err.response.data && err.response.data.error) {
-                setError(err.response.data.error); // Show error message from the server
-            } else {
-                setError("An unexpected error occurred. Please try again later.");
-            }
+        } catch (error) {
+            console.error('Error sending request:', error);
+            setError("An unexpected error occurred. Please try again later.");
         }
     };
 

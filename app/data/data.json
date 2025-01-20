@@ -76,6 +76,18 @@
       "writer": 1,
       "editor": null,
       "company": 2
+    },
+    {
+      "id": 4,
+      "image": "https://res.cloudinary.com/yogeek-cloudinary/image/upload/v1737342371/samples/bbdvhqmw8whhod6lxye1.jpg",
+      "title": "Testing",
+      "link": "http://localhost:3000/article/aasgaga",
+      "date": "2025-01-20",
+      "content": "asgasgasgag",
+      "status": "For Edit",
+      "writer": 1,
+      "editor": null,
+      "company": 3
     }
   ]
 }
