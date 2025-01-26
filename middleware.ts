@@ -12,7 +12,7 @@ export function middleware(req: NextRequest) {
 
     // If no token and accessing restricted paths like `/admin`, redirect to login
     if (!token && req.nextUrl.pathname.startsWith('/admin')) {
-        return NextResponse.redirect(new URL('/login', req.url)); // Redirect unauthenticated users to login
+        return NextResponse.redirect(new URL('/', req.url)); // Redirect unauthenticated users to login
     }
 
     // Proceed to the requested page
