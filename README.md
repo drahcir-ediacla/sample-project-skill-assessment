@@ -22,4 +22,16 @@ A simple Next.js project with mock API and JSON-based data storage.
 - Failure to implement a text editor or WYSIWYG editor in the Content field. (I got stuck with this part of the process and decided to temporarily skip it.)
 - Link of article will lead to 404 page as I am not yet done creating page for specific article.
 
+Deployed on Vercel:
+https://sample-project-skill-assessment.vercel.app/
+
+Credentials of editor:
+Username: admin_editor
+Password: P@ss#0365
+
+Credentials of writer:
+Username: admin_writer
+Password: P@$$#01205
+
+
 Note: This app is a demonstration and uses a file-based storage system (data.json) for simplicity. In production, a scalable database would replace this setup. 
