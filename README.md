@@ -23,3 +23,11 @@ A simple Next.js project with mock API and JSON-based data storage.
 - Link of article will lead to 404 page as I am not yet done creating page for specific article.
 
 Note: This app is a demonstration and uses a file-based storage system (data.json) for simplicity. In production, a scalable database would replace this setup. 
+
+Credentials of editor:
+Username: admin_editor
+Password: P@ss#0365
+
+Credentials of writer:
+Username: admin_writer
+Password: P@$$#01205
