@@ -33,3 +33,8 @@ Password: P@ss#0365
 Credentials of writer:
 Username: admin_writer
 Password: P@$$#01205
+
+Resources
+https://aiven.io/mysql
+https://stackoverflow.com/questions/71506016/how-to-run-front-end-and-backend-together-in-react-js-and-express-js
+https://www.svgrepo.com/vectors/edit-tool-pencil/
