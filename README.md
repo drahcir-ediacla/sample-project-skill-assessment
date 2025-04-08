@@ -38,3 +38,4 @@ Resources
 https://aiven.io/mysql
 https://stackoverflow.com/questions/71506016/how-to-run-front-end-and-backend-together-in-react-js-and-express-js
 https://www.svgrepo.com/vectors/edit-tool-pencil/
+https://www.youtube.com/@MrBuloy11/playlists
