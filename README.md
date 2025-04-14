@@ -25,39 +25,3 @@ A simple Next.js project with mock API and JSON-based data storage.
 Note: This app is a demonstration and uses a file-based storage system (data.json) for simplicity. In production, a scalable database would replace this setup. 
 Deployed on Vercel:
 https://sample-project-skill-assessment.vercel.app/
-
-Credentials of editor:
-Username: admin_editor
-Password: P@ss#0365
-
-Credentials of writer:
-Username: admin_writer
-Password: P@$$#01205
-
-- ilovewebdev#143
-- infinity#0829
-- BuLoY#0227
-- moneymakermir4#101
-- geekYa#123456
-- RiCh16#0227
-- BogsT#91723
-
-Resources
-https://aiven.io/mysql
-https://stackoverflow.com/questions/71506016/how-to-run-front-end-and-backend-together-in-react-js-and-express-js
-https://www.svgrepo.com/vectors/edit-tool-pencil/
-https://www.youtube.com/@MrBuloy11/playlists
-
-Extension:
-- Prisma (Prisma.io)
-- Tailwind CSS IntelliSense (Tailwind Labs)
-- Live Server (Ritwick Dey)
-- JavaScript and TypeScript Nightly (Microsoft)
-- Github Pull Requests (Github)
-- ES7+ React/Redux/React-Native snippets
-
-Setup Prisma:
-- npm i prisma > npx prisma init
-- npx prisma migrate dev
-- npx prisma db push
-- npx prisma generate
